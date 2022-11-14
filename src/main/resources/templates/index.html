@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<form>
+  <h1>ElasticSearch搜索引擎</h1>
+  <input type="text" class="text" name="centent">
+  <input type="button" class="btn" value="提交">
+
+</form>
+  <div>
+    <ul class="info">
+<!--      <h5>搜索的结果是：</h5>-->
+    </ul>.
+  </div>
+<script>
+<!--    当点击提交按钮的时候，执行方法-->
+$(".btn").click(function (){
+  //  执行Ajax方法
+  $.ajax({
+    //  请求方式
+    type:"get",
+    //  请求的@Mapping地址，拼接的是输入搜索的词
+    url:"hightLight?kw="+$(".text").val(),
+    //当执行成功的时候，执行方法，有参函数
+    success:function (result){
+      //每次重新搜索高亮的时候，清零，否则就会加载前一次搜索的数据后面
+      $(".info").html("");
+      //添加每一条符合条件的数据
+      $(".info").append("<h5>搜索的结果是：</h5>")
+      //依次循环出每一条符合条件的数据
+      for (var i = 0; i < result.length; i++) {
+        var id = result[i].id
+        var age = result[i].age;
+        var name = result[i].name;
+        var info = result[i].info;
+        //把拼接好的数据放在<ul></ul>>中
+        $(".info").append("<li> id = "+id+" age = "+age+" name = "+name+" info = "+info+"</li>")
+      }
+
+    }
+  })
+})
+</script>
+</body>
+</html>

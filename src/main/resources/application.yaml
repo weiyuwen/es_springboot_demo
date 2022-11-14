@@ -1,0 +1,12 @@
+# 项目名
+server:
+  servlet:
+    context-path: /es_demo
+spring:
+  elasticsearch:
+    rest:
+      uris: localhost:9200
+      connection-timeout: 5s
+      socket-timeout: 30s
+  resources:
+    static-locations: classpath:templates/
